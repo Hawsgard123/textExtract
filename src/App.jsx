@@ -24,7 +24,11 @@ export default function App() {
     const result = await textExtractApi(image);
 
     if (result.status === 'True') {
-      setText(result.message.data.data.text);
+      const output = result.message.data.data.text;
+      if(output === null) 
+          setText("No text present in the image.");
+      else
+          setText(output);
     } else {
       setText('Server Side Error');
     }
